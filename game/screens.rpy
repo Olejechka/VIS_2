@@ -395,7 +395,7 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Начать") action Start()
+            textbutton _("НАЧАТЬ") action Start()
 
         #else:
 
@@ -405,7 +405,7 @@ screen navigation():
 
         #textbutton _("Загрузить") action ShowMenu("load")
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+            textbutton _("НАСТРОЙКИ") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -413,20 +413,17 @@ screen navigation():
 
         elif not main_menu:
 
+            textbutton _("Настройки") action ShowMenu("preferences")
+
             textbutton _("Главное меню") action MainMenu()
 
-        textbutton _("Об игре") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Помощь не необходима и не относится к мобильным устройствам.
             textbutton _("Помощь") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("ВЫХОД") action Quit(confirm=not main_menu)
 
 
 
@@ -439,6 +436,28 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
+    color "#FFC9A8"  # основной цвет текста
+
+    # Многослойный outline для имитации свечения
+    outlines [
+        (1, "#FFDCC7", 0, 0),
+        (2, "#FFE9DD", 0, 0),
+        (3, "#FFECE2", 0, 0),
+        (4, "#FFEFE8", 0, 0),
+    ]
+
+    # Эффекты текста при наведении
+    hover_color "#FFFFFF"  # Цвет текста при наведении
+    idle_color "#FFC9A8"   # Цвет текста в обычном состоянии
+
+    # Эффекты outline при наведении
+    hover_outlines [
+        (1, "#FF4500", 0, 0),  # Более яркий контур при наведении
+        (2, "#FF6347", 0, 0),
+        (3, "#FF7F50", 0, 0),
+    ]
+
+
 
 
 ## Экран главного меню #########################################################
@@ -448,35 +467,103 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
-
-    ## Этот тег гарантирует, что любой другой экран с тем же тегом будет
-    ## заменять этот.
     tag menu
 
-    add gui.main_menu_background
+    # Фон главного меню
+    add gui.main_menu_background at mouse_parallax_transform
 
-    ## Эта пустая рамка затеняет главное меню.
+    # Затеняющая рамка (если используется)
     frame:
         style "main_menu_frame"
 
-    ## Оператор use включает отображение другого экрана в данном. Актуальное
-    ## содержание главного меню находится на экране навигации.
+    # Основное меню слева (навигация)
     use navigation
 
+    # Название игры
     if gui.show_name:
+        text "[config.name!t]":
+            style "main_menu_title"
+            xalign 1.0
+            yalign 0.5
+            xoffset -150
 
-        vbox:
-            style "main_menu_vbox"
+    # кнопки с картинками
+    hbox:
+        xalign 1.0
+        yalign 0.0
+        xoffset -25
+        yoffset 25
+        spacing 20
 
-            text "[config.name!t]":
-                style "main_menu_title"
+        # кнопка "Помощь" (управление короч)
+        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+            imagebutton:
+                idle "gui/button/C_i.png"
+                hover "gui/button/C_i.png"
+                action ShowMenu("help")
+                tooltip _("Помощь")
 
-            text "[config.version]":
-                style "main_menu_version"
+        # кнопка "Об игре"
+        imagebutton:
+            idle "gui/button/Q_i.png"
+            hover "gui/button/Q_i.png"
+            action ShowMenu("about")
+            tooltip _("Об игре")
+
+    #ВЕРСИЯ
+    if gui.show_name:
+        text "[config.version]":
+            style "main_menu_version"
+
+transform mouse_parallax_transform:
+    function mouse_parallax_bg
+
+init python:
+    class MouseParallaxBackground(object):
+        def __init__(self, strength=1, zoom=1.1):
+            self.strength = strength  # Сила эффекта (чем больше, тем заметнее)
+            self.zoom = zoom          # Увеличение фона (чтобы не было пустых краев)
+            self.center_x = 0.5
+            self.center_y = 0.5
+
+        def __call__(self, transform, st, at):
+            import math
+
+            # Получаем размеры экрана
+            screen_width, screen_height = renpy.get_physical_size()
+
+            # Получаем позицию мыши
+            mouse_x, mouse_y = renpy.get_mouse_pos()
+
+            if mouse_x is None or mouse_y is None:
+                mouse_x = screen_width // 2
+                mouse_y = screen_height // 2
+
+            # Нормализуем координаты мыши (от -1 до 1)
+            norm_x = (mouse_x / screen_width - 0.5) * 10
+            norm_y = (mouse_y / screen_height - 0.5) * 10
+
+            # Вычисляем смещение (в противоположную сторону)
+            offset_x = -norm_x * self.strength
+            offset_y = -norm_y * self.strength
+
+            # Применяем трансформацию
+            transform.xalign = self.center_x + offset_x
+            transform.yalign = self.center_y + offset_y
+            transform.zoom = self.zoom
+
+            # Возвращаем очень маленькую задержку для плавности
+            return 0.01
+
+    # Функция для создания экземпляра параллакса
+    def mouse_parallax_bg(trans, st, at):
+        # Создаем один раз и переиспользуем
+        if not hasattr(renpy.store, '_mouse_parallax_bg'):
+            renpy.store._mouse_parallax_bg = MouseParallaxBackground(strength=0.03, zoom=1.1)
+        return renpy.store._mouse_parallax_bg(trans, st, at)
 
 
 style main_menu_frame is empty
-style main_menu_vbox is vbox
 style main_menu_text is gui_text
 style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
@@ -484,25 +571,31 @@ style main_menu_version is main_menu_text
 style main_menu_frame:
     xsize 420
     yfill True
-
     background "gui/overlay/main_menu.png"
 
-style main_menu_vbox:
-    xalign 1.0
-    xoffset -30
-    xmaximum 1200
-    yalign 1.0
-    yoffset -30
-
-style main_menu_text:
-    properties gui.text_properties("main_menu", accent=True)
-
+# Стиль для названия игры по центру (новый!)
 style main_menu_title:
     properties gui.text_properties("title")
+    #xalign 0.5
+    size 120
+    color "#FFC9A8"
 
+    outlines [
+        (1, "#FFE9DD90", 0, 0),
+        (2, "#FFDCC770", 0, 0),
+        (3, "#FFDCC760", 0, 0),
+        (4, "#FFDCC750", 0, 0),
+        (5, "#FFDCC740", 0, 0),
+        (6, "#FFDCC730", 0, 0),
+    ]
+
+# Стиль для версии — как раньше, но привязан к углу
 style main_menu_version:
     properties gui.text_properties("version")
-
+    xalign 1.0
+    yalign 1.0
+    xoffset -30
+    yoffset -30
 
 ## Экран игрового меню #########################################################
 ##
