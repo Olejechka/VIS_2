@@ -180,6 +180,21 @@ init python:
 
     ## Классифицируйте файлы как None, чтобы исключить их из дистрибутивов.
 
+    # Отключаем горячие клавиши
+    config.keymap['save'] = []           # Ctrl+S
+    config.keymap['load'] = []           # Ctrl+L
+    config.keymap['skip'] = []
+    config.keymap['toggle_skip'] = []
+    config.keymap['fast_skip'] = []
+    config.keymap['rollback'] = []       # Shift+click
+    config.keymap['replay'] = []         # Ctrl+R
+    config.keymap['q_save'] = []         # F5
+    config.keymap['q_load'] = []         # F8
+    config.keymap['rollforward'] = []    # F7
+
+    # Оставляем только нужное
+    config.keymap['game_menu'] = ['K_ESCAPE']
+
     build.classify('**~', None)
     build.classify('**.bak', None)
     build.classify('**/.**', None)

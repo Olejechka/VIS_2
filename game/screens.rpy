@@ -81,6 +81,49 @@ style frame:
 ## Внутриигровые экраны
 ################################################################################
 
+screen input_fio_screen():
+    modal True
+    zorder 100
+
+
+    add Solid("#000000AA")
+
+    frame:
+        align (0.5, 0.5)
+        padding (40, 40)
+        background Frame("gui/frame.png", 25, 25)
+
+        vbox:
+            spacing 25
+            xalign 0.5
+
+            label "Карточка сотрудника" xalign 0.5
+
+            # Фамилия
+            hbox:
+                spacing 15
+                yalign 0.5
+                text "фИО:":
+                    size 24
+                    min_width 120
+                input:
+                    id "surname_input"
+                    value VariableInputValue("surname")
+                    length 30
+                    size 32
+                    color "#0094FF"
+
+            # Кнопк
+            hbox:
+                xalign 0.5
+
+                textbutton "Подтвердить":
+                    action [
+                        SetVariable("surname", surname if surname else "Иванов"),
+                        Return()
+                    ]
+                    sensitive (surname)# Только если заполнены имя и фамилия
+
 screen map_screen:
     tag menu  # чтобы можно было вызывать через call screen
 
@@ -391,6 +434,7 @@ screen navigation():
         yalign 0.5
 
 
+
         spacing gui.navigation_spacing
 
         if main_menu:
@@ -415,7 +459,7 @@ screen navigation():
 
             textbutton _("Настройки") action ShowMenu("preferences")
 
-            textbutton _("Главное меню") action MainMenu()
+            textbutton _("В меню") action MainMenu()
 
             textbutton _("Помощь") action ShowMenu("help")
 
@@ -438,6 +482,7 @@ style navigation_button_text:
     properties gui.text_properties("navigation_button")
     color "#FFC9A8"  # основной цвет текста
 
+    size 60
     #font "TS.otf"
     # Многослойный outline для имитации свечения
     #outlines [
@@ -462,6 +507,11 @@ style navigation_button_text:
 
 screen main_menu():
     tag menu
+
+    on "show" action Play("music", "audio/vn2sample4.mp3", loop=True, fadein=2.0)
+
+    # Останавливаем музыку при уходе с меню
+    on "hide" action Stop("music", fadeout=2.0)
 
     # Фон главного меню
     add gui.main_menu_background at mouse_parallax_transform
@@ -493,17 +543,18 @@ screen main_menu():
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
             imagebutton:
                 idle "gui/button/C_i.png"
-                hover "gui/button/C_i.png"
+                hover "gui/button/C_h.png"
                 action ShowMenu("help")
                 tooltip _("Помощь")
+                focus_mask True
 
         # кнопка "Об игре"
         imagebutton:
             idle "gui/button/Q_i.png"
-            hover "gui/button/Q_i.png"
+            hover "gui/button/Q_h.png"
             action ShowMenu("about")
             tooltip _("Об игре")
-
+            focus_mask True
     #ВЕРСИЯ
     if gui.show_name:
         text "[config.version]":
@@ -936,10 +987,10 @@ screen preferences():
 
                 vbox:
                     style_prefix "check"
-                    label _("Пропуск")
-                    textbutton _("Всего текста") action Preference("skip", "toggle")
-                    textbutton _("После выборов") action Preference("after choices", "toggle")
-                    textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+                    #label _("Пропуск")
+                    #textbutton _("Всего текста") action Preference("skip", "toggle")
+                    #textbutton _("После выборов") action Preference("after choices", "toggle")
+                    #textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
@@ -1211,21 +1262,21 @@ screen keyboard_help():
         label _("Esc")
         text _("Вход в игровое меню.")
 
-    hbox:
-        label _("Ctrl")
-        text _("Пропускает диалоги, пока зажат.")
+    #hbox:
+    #    label _("Ctrl")
+    #    text _("Пропускает диалоги, пока зажат.")
 
-    hbox:
-        label _("Tab")
-        text _("Включает режим пропуска.")
+    #hbox:
+    #    label _("Tab")
+    #    text _("Включает режим пропуска.")
 
-    hbox:
-        label _("Page Up")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Page Up")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Page Down")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Page Down")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
     hbox:
         label "H"
@@ -1239,9 +1290,9 @@ screen keyboard_help():
         label "V"
         text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
 
-    hbox:
-        label "Shift+A"
-        text _("Открывает меню специальных возможностей.")
+    #hbox:
+    #    label "Shift+A"
+    #    text _("Открывает меню специальных возможностей.")
 
 
 screen mouse_help():
@@ -1258,13 +1309,13 @@ screen mouse_help():
         label _("Правый клик")
         text _("Вход в игровое меню.")
 
-    hbox:
-        label _("Колёсико вверх")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Колёсико вверх")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Колёсико вниз")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Колёсико вниз")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
 
 screen gamepad_help():
@@ -1273,13 +1324,13 @@ screen gamepad_help():
         label _("Правый триггер\nA/Нижняя кнопка")
         text _("Прохождение диалогов, активация интерфейса.")
 
-    hbox:
-        label _("Левый Триггер\nЛевый Бампер")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Левый Триггер\nЛевый Бампер")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Правый бампер")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Правый бампер")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
     hbox:
         label _("Крестовина, Стики")

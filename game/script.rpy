@@ -6,6 +6,9 @@ define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_c
 
 default selected_location = None
 
+
+default surname = ""
+
 # Вместо использования оператора image можете просто
 # складывать все ваши файлы изображений в папку images.
 # Например, сцену bg room можно вызвать файлом "bg room.png",
@@ -28,10 +31,10 @@ label open_map:
     else:
         jump expression selected_location
 
-
-
 label start:
     play music work_b fadein 1.0
+    call screen input_fio_screen
+
     show office with fade
     "Ты пишешь тест"
     jump t_c
