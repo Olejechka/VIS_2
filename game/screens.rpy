@@ -395,7 +395,7 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("НАЧАТЬ") action Start()
+            textbutton _("начать") action Start()
 
         #else:
 
@@ -405,7 +405,7 @@ screen navigation():
 
         #textbutton _("Загрузить") action ShowMenu("load")
 
-            textbutton _("НАСТРОЙКИ") action ShowMenu("preferences")
+            textbutton _("настройки") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -423,7 +423,7 @@ screen navigation():
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("ВЫХОД") action Quit(confirm=not main_menu)
+            textbutton _("выход") action Quit(confirm=not main_menu)
 
 
 
@@ -438,24 +438,18 @@ style navigation_button_text:
     properties gui.text_properties("navigation_button")
     color "#FFC9A8"  # основной цвет текста
 
+    #font "TS.otf"
     # Многослойный outline для имитации свечения
-    outlines [
-        (1, "#FFDCC7", 0, 0),
-        (2, "#FFE9DD", 0, 0),
-        (3, "#FFECE2", 0, 0),
-        (4, "#FFEFE8", 0, 0),
-    ]
+    #outlines [
+    #    (1, "#FFDCC7", 0, 0),
+    #    (2, "#FFE9DD", 0, 0),
+    #    (3, "#FFECE2", 0, 0),
+    #    (4, "#FFEFE8", 0, 0),
+    #]
 
     # Эффекты текста при наведении
     hover_color "#FFFFFF"  # Цвет текста при наведении
-    idle_color "#FFC9A8"   # Цвет текста в обычном состоянии
-
-    # Эффекты outline при наведении
-    hover_outlines [
-        (1, "#FF4500", 0, 0),  # Более яркий контур при наведении
-        (2, "#FF6347", 0, 0),
-        (3, "#FF7F50", 0, 0),
-    ]
+    idle_color "#FFECDC"   # Цвет текста в обычном состоянии
 
 
 
@@ -578,7 +572,7 @@ style main_menu_title:
     properties gui.text_properties("title")
     #xalign 0.5
     size 120
-    color "#FFC9A8"
+    color "#FFFFFF"
 
     outlines [
         (1, "#FFE9DD90", 0, 0),
@@ -587,6 +581,8 @@ style main_menu_title:
         (4, "#FFDCC750", 0, 0),
         (5, "#FFDCC740", 0, 0),
         (6, "#FFDCC730", 0, 0),
+        (5, "#FFDCC720", 0, 0),
+        (6, "#FFDCC710", 0, 0)
     ]
 
 # Стиль для версии — как раньше, но привязан к углу

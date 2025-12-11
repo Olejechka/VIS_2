@@ -1,8 +1,8 @@
 ﻿# Персонаж
-define norr = Character('', what_color="#6b3fa0", what_font="Ebbe Light.ttf", who_font="Ebbe Regular.ttf")
-define e = Character('Вы', color="#00bfff", what_font="Ebbe Light.ttf", who_font="Ebbe Regular.ttf")
-define r = Character('Руст', color="#00bfff", what_slow_cps = 15, what_font="Ebbe Light.ttf", who_font="Ebbe Regular.ttf", what_size=40)
-define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_cps = 15, what_font="Ebbe Light.ttf", who_font="Ebbe Regular.ttf", what_size=40)
+define norr = Character('', what_color="#6b3fa0")
+define e = Character('Вы', color="#00bfff")
+define r = Character('Руст', color="#00bfff", what_slow_cps = 15, what_size=40)
+define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_cps = 15, what_size=40)
 
 default selected_location = None
 
@@ -44,7 +44,7 @@ label t_c:
             $ err = 0
         "Сосновка":
             $ err = 0
-        "Шухарды":
+        "Пиздоблядская деревня ебаной хуйниа":
             $ err = 1
     hide screen map_but
     hide office with fade
@@ -56,7 +56,8 @@ label instr:
     show proj_d
     pause 1.0
     show proj_w with  dissolve
-    ruqa "Уважаемые коллеги, сегодня вы направляетесь в плановую выездную проверку корректности учёта электроэнергии в населённых пунктах, подключённых к единому вводу."
+    r "О, привет. Ты как раз воворемя, сейчас начнется.."
+    ruqa "Уважаемые Коллеги, сегодня вы направляетесь в плановую выездную проверку корректности учёта электроэнергии в населённых пунктах, подключённых к единому вводу."
     ruqa "Цель проверки – выявление возможных нарушений при эксплуатации приборов учёта, включая несанкционированные вмешательства и искажение данных."
     ruqa "Прошу вас отнестись к задаче с максимальной ответственностью. Ваша работа напрямую влияет на достоверность коммерческого учёта и, как следствие, на финансовые показатели предприятия."
     ruqa "Не забудьте надеть униформу и взять необходимые приборы. "
@@ -74,7 +75,7 @@ label instr:
     ruqa "По завершении обхода нанесите маршрут проверки на схему населённого пункта и оформите служебный отчёт в установленной форме."
     ruqa "Всё понятно?"
 
-    "Звук шкафчика обордования"
+    "Звук шкафчика оборудования"
     "Звук скрипа двери"
     "Звук старта двигателя"
     "Затихающий звук отъезжающей машины"
