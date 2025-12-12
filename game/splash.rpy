@@ -1,6 +1,6 @@
 ﻿label splashscreen:
     # Воспроизводим музыку
-    play sound select_click fadein 2.0
+    play sound door6
 
     # Показываем логотип на 3 секунды, затем плавно исчезает
     show logo2 with fade
