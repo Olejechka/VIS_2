@@ -4,8 +4,9 @@ define e = Character('Вы', color="#00bfff")
 define r = Character('Геннадий', color="#00bfff", what_slow_cps = 15, what_size=40)
 define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_cps = 15, what_size=40)
 
-default selected_location = None
 
+default selected_location = None
+default schet = 0
 
 default surname = ""
 
@@ -17,41 +18,19 @@ default surname = ""
 # Игра начинается здесь:
 
 
-label open_map:
-    call screen map_screen
-    if selected_location == "h1":
-        scene
-        jump h1
-    elif selected_location == "h2":
-        scene
-        jump h2
-    elif selected_location == "h3":
-        scene
-        jump h3
-    else:
-        jump expression selected_location
-
 label start:
     play music work_b fadein 1.0
     call screen input_fio_screen
 
     show office with fade
     "Ты пишешь тест"
-    jump t_c
+    call mini_game_screen
 
-label t_c:
-    $ selected_location = "t_c"
-    show screen map_but
-    menu:
-        "Звездная":
-            $ err = 0
-        "Сосновка":
-            $ err = 0
-        "Шухарды":
-            $ err = 1
-    hide screen map_but
+    r "Доброе утро, напарник!"
+    r "Вижу, ты уже закончил с тестом, это очень вовремя."
+    r "Руководство зовет нас с тобой на инструктаж, кажется сегодня будет рабочий выезд."
     hide office with fade
-    jump instr
+    jump f_ch
 
 label instr:
     show proj with fade
@@ -81,82 +60,20 @@ label instr:
     ruqa "Всё понятно?"
     r "Цель - ясна! Мы выдвигаемся"
 
-    "почистить"
+label end:
 
-    play soud door6
+    stop music
 
-    pause 3.0
+    scene black with Dissolve(0.5)
+
+    play sound door6
+
+    $ renpy.pause(3.0, hard=True)
 
     play sound cardrivingaway2
 
-    pause 3.0
+    $ renpy.pause(15.0, hard=True)
+
+    jump start_vil
 
 
-
-    "Звук шкафчика оборудования"
-    "Звук скрипа двери"
-    "Звук старта двигателя"
-    "Затихающий звук отъезжающей машины"
-
-    if err == 0:
-        r "Слушай, а мы точно туда едем?"
-        e "Да, вроде. Я всё посчитал, нам нужно в эту деревню"
-        r "Я просто тоже считал, и у меня получилось совсем другое. Могу я проверить? Береженого Бог бережет"
-        e "Дерзай"
-        norr "*Вы передаете документы напарнику*"
-        norr "*Ваш напарник несколько минут внимательно осматривает документы и делает для себя какие-то пометки карандашом*"
-        norr "*Спустя ещё каке-то время, он поворачивается к вам, и начинает детально детально, но по дружески, показывать где вы ошиблись*"
-        norr "*Вы меняете свой курс назначения*"
-
-    jump start1
-
-label start1:
-    stop music
-    play music work_b
-    show office with fade
-    e "Что мне делать дальше?"
-
-    menu:
-        "Далее":
-            jump start
-            scene
-        "Поиск":
-            e "Ты осматриваешься вокруг..."
-            jump start
-
-label h1:
-    stop music
-    scene cus
-    e "Закрой."
-
-    menu:
-        "Далее":
-            scene
-            jump start
-        "Поиск":
-            e "Ты осматриваешься вокруг..."
-            jump start
-
-label h2:
-    stop music
-    scene out
-    e "Свой."
-
-    menu:
-        "Далее":
-            jump start
-        "Поиск":
-            e "Ты осматриваешься вокруг..."
-            jump start
-
-label h3:
-    stop music
-    scene der
-    e "Ротик)."
-
-    menu:
-        "Далее":
-            jump start
-        "Поиск":
-            call screen search
-            jump h3

@@ -135,22 +135,22 @@ screen map_screen:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", "h1"), Return()]
-        xalign 0.3
-        yalign 0.4
+        xalign 0.7
+        yalign 0.8
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", "h2"), Return()]
-        xalign 0.6
-        yalign 0.5
+        xalign 0.35
+        yalign 0.52
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", "h3"), Return()]
-        xalign 0.5
-        yalign 0.7
+        xalign 0.7
+        yalign 0.52
 
     textbutton "Назад" action Return() xalign 0.95 yalign 0.95
 
@@ -354,8 +354,8 @@ style choice_button_text is button_text
 
 style choice_vbox:
     xalign 0.5
-    ypos 405
-    yanchor 0.5
+    ypos 890
+    yanchor 0.6
 
     spacing gui.choice_spacing
 
