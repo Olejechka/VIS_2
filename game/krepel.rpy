@@ -26,7 +26,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                 padding (30, 30)
 
         if not show_rules:
-            timer 5.0 action SetScreenVariable("time_vsy", True)
+            timer 20.0 action SetScreenVariable("time_vsy", True)
 
         vbox:
             spacing 30
@@ -111,7 +111,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                     if store.vrem_vsy:
                         text "Время вышло!" size 24 color "#ff4444" yalign 0.5
 
-                    textbutton "Далее":
+                    textbutton "Так Далее":
                         action [
                             SetVariable("vrem_vsy", time_vsy),
                             SetVariable("us_ans", vvod),

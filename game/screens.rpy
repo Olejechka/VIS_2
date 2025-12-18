@@ -152,6 +152,13 @@ screen map_screen:
         xalign 0.7
         yalign 0.52
 
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", "h4"), Return()]
+        xalign 0.5
+        yalign 0.52
+
     textbutton "Назад" action Return() xalign 0.95 yalign 0.95
 
 screen search:
@@ -355,9 +362,9 @@ style choice_button_text is button_text
 style choice_vbox:
     xalign 0.5
     ypos 890
-    yanchor 0.6
+    yanchor 0.5
 
-    spacing gui.choice_spacing
+    spacing 10
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
