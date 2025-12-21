@@ -85,45 +85,96 @@ screen input_fio_screen():
     modal True
     zorder 100
 
+    default step = 1
+    fixed:
+        xsize 500
+        ysize 300
+        xalign 0.5
+        yalign 0.5
 
-    add Solid("#000000AA")
-
-    frame:
-        align (0.5, 0.5)
-        padding (40, 40)
-        background Frame("gui/frame.png", 25, 25)
+        frame:
+            align (0.5, 0.5)
+            padding (40, 40)
+            background Frame("gui/frame.png", 25, 25)
 
         vbox:
             spacing 25
             xalign 0.5
+            yalign 0.5
 
-            label "Карточка сотрудника" xalign 0.5
+            label "Ф.И.О. тестируемого" xalign 0.5
 
-            # Фамилия
-            hbox:
-                spacing 5
-                yalign 0.5
-                text "фИО:":
-                    size 24
-                    min_width 120
-                input:
-                    id "surname_input"
-                    value VariableInputValue("surname")
-                    length 30
-                    size 32
-                    color "#000"
+            if step == 1:
+                vbox:
+                    spacing 15
+                    xalign 0.5
+                    text "Введите имя:" size 24 xalign 0.5
+                    input:
+                        id "name_input"
+                        value VariableInputValue("name")
+                        length 20
+                        size 32
+                        color "#000"
+                        text_align 0.5
+                        xalign 0.5
+                        xmaximum 300
+                        allow "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                    textbutton "Далее →":
+                        xalign 0.5
+                        action SetScreenVariable("step", 2)
+                        sensitive name.strip()
+                        keysym [ "K_RETURN", "K_KP_ENTER" ]
 
-            # Кнопк
-            hbox:
-                xalign 0.5
+            elif step == 2:
+                vbox:
+                    spacing 15
+                    xalign 0.5
+                    text "Введите фамилию:" size 24 xalign 0.5
+                    input:
+                        id "surname_input"
+                        value VariableInputValue("surname")
+                        length 20
+                        size 32
+                        color "#000"
+                        text_align 0.5
+                        xalign 0.5
+                        xmaximum 300
+                        allow "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                    hbox:
+                        xalign 0.5
+                        spacing 20
+                        textbutton "← Назад":
+                            action SetScreenVariable("step", 1)
+                        textbutton "Далее →":
+                            action SetScreenVariable("step", 3)
+                            sensitive surname.strip()
+                            keysym [ "K_RETURN", "K_KP_ENTER" ]
 
-                textbutton "Подтвердить":
-                    action [
-                        SetVariable("surname", surname if surname else "Иванов"),
-                        Return()
-                    ]
-                    keysym "input_enter"
-                    sensitive (surname)# Только если заполнены имя и фамилия
+            elif step == 3:
+                vbox:
+                    spacing 15
+                    xalign 0.5
+                    text "Введите отчество:" size 24 xalign 0.5
+                    input:
+                        id "otch_input"
+                        value VariableInputValue("otch")
+                        length 20
+                        size 32
+                        color "#000"
+                        text_align 0.5
+                        xalign 0.5
+                        xmaximum 300
+                        allow "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                    hbox:
+                        xalign 0.5
+                        spacing 20
+                        textbutton "← Назад":
+                            action SetScreenVariable("step", 2)
+                        textbutton "Подтвердить":
+                            action Return()
+                            keysym [ "K_RETURN", "K_KP_ENTER" ]
+
+
 
 screen map_screen:
     tag menu  # чтобы можно было вызывать через call screen
@@ -135,87 +186,33 @@ screen map_screen:
     imagebutton:
         idle "org.png"
         hover "blu.png"
-        action [SetVariable("selected_location", "h1"), Return()]
+        action [SetVariable("selected_location", l_1), Return()]
         xalign 0.7
         yalign 0.8
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
-        action [SetVariable("selected_location", "h2"), Return()]
+        action [SetVariable("selected_location", l_2), Return()]
         xalign 0.35
         yalign 0.52
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
-        action [SetVariable("selected_location", "h3"), Return()]
+        action [SetVariable("selected_location", l_3), Return()]
         xalign 0.7
         yalign 0.52
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
-        action [SetVariable("selected_location", "h4"), Return()]
+        action [SetVariable("selected_location", l_4), Return()]
         xalign 0.5
         yalign 0.52
 
     textbutton "Назад" action Return() xalign 0.95 yalign 0.95
 
-screen search:
-    tag menu
-
-    modal True
-
-    imagemap:
-
-        ground "office"
-
-        imagebutton:
-            idle Null()
-            hover Null()
-            xoffset 300
-            yoffset 200
-            xsize 220
-            ysize 220
-            action [
-                Show("pop", message="Excel таблциа."),
-                Play("sound", "audio/select_click.mp3")
-            ]
-
-        imagebutton:
-            idle Null()
-            hover Null()
-            xoffset 100
-            yoffset 400
-            xsize 160
-            ysize 160
-            action [
-                Show("pop", message="Фирма Apple."),
-                Play("sound", "audio/select_click.mp3")
-            ]
-
-        add "#ff00ff40" at Transform(xoffset=300, yoffset=200, xsize=220, ysize=220)
-        add "#00ffff40" at Transform(xoffset=100, yoffset=400, xsize=160, ysize=160)
-
-        textbutton "Назад" action Return() xalign 0.95 yalign 0.95
-
-
-
-screen pop(message):
-    zorder 200
-    frame:
-        xalign 0.5
-        yalign 0.9
-        xpadding 30
-        ypadding 15
-        text message:
-            size 28
-            color "#ffffff"
-            outlines [(2, "#000000", 0, 0)]
-    timer 1.5 action Hide("pop")
-    #клик для закрытия:
-    on "click" action Hide("pop")
 
 screen map_but:
     imagebutton:
