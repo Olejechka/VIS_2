@@ -8,8 +8,6 @@
 
 screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
     tag mini_game
-
-    default vvod = ""
     default time_vsy = False
 
     fixed:
@@ -26,7 +24,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                 padding (30, 30)
 
         if not show_rules:
-            timer 20.0 action SetScreenVariable("time_vsy", True)
+            timer 10.0 action SetScreenVariable("time_vsy", True)
 
         vbox:
             spacing 30
@@ -43,7 +41,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                     xsize 550
 
                     text "• Вам будут показаны два числа для сложения" size 22 color "#000"
-                    text "• У вас есть 5 секунд, чтобы ввести ответ" size 22 color "#000"
+                    text "• У вас есть 10 секунд, чтобы ввести ответ" size 22 color "#000"
                     text "• Второй попытки на ввод не дается" size 22 color "#000"
                     text "• Всего будет [rounds] раундов" size 22 color "#000"
                     text "• Для ввода используйте цифровую клавиатуру" size 22 color "#000"
@@ -53,6 +51,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                     action [
                         Return({"start": True})
                     ]
+                    keysym "input_enter"
                     xalign 0.5
                     xsize 250
                     background Solid("#6CB0D8")
@@ -95,7 +94,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                         input:
                             id "answer_input"
                             length 4
-                            default vvod
+                            value VariableInputValue("us_ans")
                             allow "0123456789"
                             size 36
                             align (0.5, 0.5)
@@ -108,15 +107,13 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                     spacing 20
                     xalign 0.5
 
-                    if store.vrem_vsy:
-                        text "Время вышло!" size 24 color "#ff4444" yalign 0.5
-
                     textbutton "Так Далее":
                         action [
                             SetVariable("vrem_vsy", time_vsy),
-                            SetVariable("us_ans", vvod),
+                            SetVariable("us_ans", us_ans),
                             Return({"next": True})
                         ]
+                        keysym "input_enter"
                         xsize 200
                         background Solid("#6CB0D8")
                         text_size 28
@@ -140,9 +137,9 @@ label mini_game_screen:
 
         call screen mini_game_ui(num1, num2, ver, r_numb + 1, rounds, show_rules=False)
 
-        $ ans = str(store.us_ans).strip()
+        #$ ans = str(store.us_ans).strip()
 
-        if not store.vrem_vsy and ans.isdigit() and int(ans) == ver:
+        if not store.vrem_vsy and str(us_ans) == str(ver):
             $ chet += 1
 
         $ r_numb += 1

@@ -1,18 +1,21 @@
 ﻿screen ct_ui():
     tag mini_game
+    add "black.png"
+
+    add "schet.png" xalign 0.95
 
     fixed:
-        xsize 1400
-        ysize 800
-        xalign 0.5
-        yalign 0.5
+        xsize 1000
+        ysize 600
+        xalign 0.05
+        yalign 0.35
 
         frame:
             background "otch.png"
             padding (5, 5)
 
         vbox:
-            spacing 25
+            spacing 10
             yalign 0.1
             xalign 0.5
             text "Показания счетчиков по электроэнергии должны записываться" size 22  xalign 0.5 color "#000"
@@ -159,6 +162,9 @@
                 text_size 25
                 text_color "#fff"
                 padding (15, 10)
+
+        textbutton "Назад" action Return() xalign 0.95 yalign 0.95
+
 
 
 label ct_lb:

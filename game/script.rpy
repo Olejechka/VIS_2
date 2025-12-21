@@ -30,7 +30,7 @@ label start:
     r "Вижу, ты уже закончил с тестом, это очень вовремя."
     r "Руководство зовет нас с тобой на инструктаж, кажется сегодня будет рабочий выезд."
     hide office with fade
-    jump instr
+    jump h1
 
 label instr:
     show proj with fade

@@ -43,7 +43,6 @@ define h5_n = 0
 
 
 label open_map:
-    stop music
     call screen map_screen
     if selected_location == "h1":
         if selected_location != curr_lock:
@@ -206,7 +205,9 @@ label h1:
                 m_30 "Валяй"
                 jump h1_q
             "2. Проверить счетчик":
+                hide screen map_but
                 call ct_lb
+                show screen map_but
             "3. Осмотреться":
                 "*Вы осматриваетесь*"
     jump h1

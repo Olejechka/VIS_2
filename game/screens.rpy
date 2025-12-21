@@ -101,7 +101,7 @@ screen input_fio_screen():
 
             # Фамилия
             hbox:
-                spacing 15
+                spacing 5
                 yalign 0.5
                 text "фИО:":
                     size 24
@@ -111,7 +111,7 @@ screen input_fio_screen():
                     value VariableInputValue("surname")
                     length 30
                     size 32
-                    color "#0094FF"
+                    color "#000"
 
             # Кнопк
             hbox:
@@ -122,6 +122,7 @@ screen input_fio_screen():
                         SetVariable("surname", surname if surname else "Иванов"),
                         Return()
                     ]
+                    keysym "input_enter"
                     sensitive (surname)# Только если заполнены имя и фамилия
 
 screen map_screen:
