@@ -89,7 +89,7 @@ screen input_fio_screen():
     fixed:
         xsize 500
         ysize 300
-        xalign 0.5
+        xalign 0.52
         yalign 0.5
 
         frame:

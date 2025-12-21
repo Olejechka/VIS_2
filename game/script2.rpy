@@ -1,9 +1,5 @@
 ﻿# Персонаж
 define golos = Character('')
-define norr = Character('', what_color="#6b3fa0")
-define e = Character('Вы', color="#00bfff")
-define r = Character('Геннадий', color="#00bfff", what_slow_cps = 15, what_size=40)
-define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_cps = 15, what_size=40)
 define dog = Character('', what_color = "#9a0e2a")
 
 
@@ -13,6 +9,14 @@ define m = Character('Мужчина', color="#9a0e2a", what_slow_cps = 15, what
 define m_30 = Character('Мужчина за 40', what_slow_cps = 15, what_size=40)
 define wom = Character('Девушка', what_slow_cps = 15, what_size=40)
 define w_60 = Character('Пожилая дама', what_slow_cps = 15, what_size=40)
+
+
+    # Правильные для проверки
+define h_number = 1
+define h_name = ""
+define h_counter = ""
+define h_fault = ""
+define h_reason = ""
 
 default selected_location = None
 
