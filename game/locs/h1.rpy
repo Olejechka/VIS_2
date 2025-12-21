@@ -1,9 +1,18 @@
-﻿define h1_v = 0
+﻿
+
+define h1_v = 0
 define h1_n = 0
 
 # МУЖЧИНА за 40
 # МУЖЧИНА за 40
 label h1:
+    $ h_number = 5
+    $ h_name = "Петров П.П."
+    $ h_counter = "12345"
+    $ h_fault = "Да"
+    $ h_reason = "Магнит"
+
+
     $ curr_lock = "h1"
     scene der4 at right
     if h1_v == 0:
@@ -60,7 +69,11 @@ label h1:
                 call ct_lb
                 show screen map_but
             "3. Осмотреться":
+                hide m_30m with dissolve
+                hide screen map_but with dissolve
                 call screen search
+                show m_30m with dissolve
+                show screen map_but with dissolve
     jump h1
 
 label h1_q:

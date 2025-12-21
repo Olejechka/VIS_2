@@ -41,7 +41,7 @@ init -1:
 
     # пункт
     style dropbox_button is button:
-        background gui.text_color
+        background Solid("#FFFFFF")
         hover_background gui.hover_color
         selected_background gui.hover_color
         selected_hover_background gui.hover_color

@@ -13,8 +13,9 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
     fixed:
         xsize 700
         ysize 450
-        xalign 0.5
-        yalign 0.5
+        xalign 0.58
+        yalign 0.32
+
 
         frame:
             background Solid("#6CB0D8")

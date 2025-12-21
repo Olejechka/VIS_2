@@ -3,6 +3,12 @@ define h3_n = 0
 
 # ЖЕНЩИНА ЗА 60
 label h3:
+    $ h_number = 3
+    $ h_name = "Петров П.П."
+    $ h_counter = "12345"
+    $ h_fault = "Да"
+    $ h_reason = "Магнит"
+
     $ curr_lock = "h3"
     scene der5 at center
     if h3_v == 0:
@@ -44,7 +50,11 @@ label h3:
                 call ct_lb
                 show screen map_but
             "3. Осмотреться":
-                "Вы осматриваете"
+                hide wom2 with dissolve
+                hide screen map_but with dissolve
+                call screen search
+                show wom2 with dissolve
+                show screen map_but with dissolve
     jump h3
 
 label h3_q:

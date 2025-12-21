@@ -4,16 +4,20 @@
 
     # Выбор фона в зависимости от curr_lock
     if curr_lock == "h1":
-        add "office"  # Фоновое изображение офиса
-        use search_office
+        add "der4" at right
+        use h1_s
 
     elif curr_lock == "h2":
-        add "kitchen"  # Фоновое изображение кухни
-        use search_kitchen
+        add "der"
+        use h2_s
 
     elif curr_lock == "h3":
-        add "bedroom"  # Фоновое изображение спальни
-        use search_bedroom
+        add "der5" at center
+        use h3_s
+
+    elif curr_lock == "h4":
+        add "der6" at right
+        use h4_s
 
     else:
         # Фон по умолчанию
@@ -25,49 +29,53 @@
 
 
 
-# Мини-игра для офиса
-screen search_office():
+screen h1_s():
     imagemap:
-        ground Null()  # Фон уже добавлен в основном экране
+        ground Null()
 
-        # Кнопки для офиса
         imagebutton:
             idle Null()
             hover Null()
-            xoffset 300
-            yoffset 200
-            xsize 220
-            ysize 220
+            xoffset 570
+            yoffset 710
+            xsize 180
+            ysize 190
             action [
-                Show("pop", message="Excel таблица."),
-                Play("sound", "audio/select_click.mp3"),
-                # Дополнительные действия для этой кнопки
-                SetVariable("found_office_item1", True)
+                Show("pop", message="изношенные оходные сапоги."),
+                Play("sound", "audio/select_click.mp3")
             ]
 
         imagebutton:
             idle Null()
             hover Null()
-            xoffset 100
-            yoffset 400
-            xsize 160
-            ysize 160
+            xoffset 1150
+            yoffset 900
+            xsize 200
+            ysize 200
             action [
-                Show("pop", message="Фирма Apple."),
-                Play("sound", "audio/select_click.mp3"),
-                SetVariable("found_office_item2", True)
+                Show("pop", message="Раскладной стул. Удобно ходить с таким на рыбалку."),
+                Play("sound", "audio/select_click.mp3")
             ]
 
-        # Добавить больше кнопок для офиса...
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 1350
+            yoffset 835
+            xsize 535
+            ysize 250
+            action [
+                Show("pop", message="Большой самодельный стол."),
+                Play("sound", "audio/select_click.mp3")
+            ]
 
         # Подсветка областей (для отладки)
-        add "#ff00ff40" at Transform(xoffset=300, yoffset=200, xsize=220, ysize=220)
-        add "#00ffff40" at Transform(xoffset=100, yoffset=400, xsize=160, ysize=160)
+        #add "#ff00ff40" at Transform(xoffset=570, yoffset=710, xsize=180, ysize=190)
+        #add "#00ffff40" at Transform(xoffset=1150, yoffset=900, xsize=200, ysize=200)
+        #add "#00ffff40" at Transform(xoffset=1350, yoffset=835, xsize=535, ysize=250)
 
 
-
-# Мини-игра для кухни
-screen search_kitchen():
+screen h2_s():
     imagemap:
         ground Null()
 
@@ -80,9 +88,8 @@ screen search_kitchen():
             xsize 180
             ysize 180
             action [
-                Show("pop", message="Найдена сковородка."),
-                Play("sound", "audio/select_click.mp3"),
-                SetVariable("found_kitchen_item1", True)
+                Show("pop", message="--"),
+                Play("sound", "audio/select_click.mp3")
             ]
 
         imagebutton:
@@ -93,9 +100,8 @@ screen search_kitchen():
             xsize 120
             ysize 120
             action [
-                Show("pop", message="Кофеварка."),
-                Play("sound", "audio/select_click.mp3"),
-                SetVariable("found_kitchen_item2", True)
+                Show("pop", message="--."),
+                Play("sound", "audio/select_click.mp3")
             ]
 
         # Подсветка областей
@@ -104,21 +110,64 @@ screen search_kitchen():
 
 
 
-# Мини-игра для спальни
-screen search_bedroom():
+screen h3_s():
     imagemap:
         ground Null()
 
-        # Кнопки для спальни
         imagebutton:
             idle Null()
             hover Null()
-            xoffset 200
-            yoffset 250
-            xsize 200
+            xoffset 1260
+            yoffset 810
+            xsize 420
             ysize 150
             action [
-                Show("pop", message="Ключ под подушкой."),
+                Show("pop", message="Клумба с необычными цветами."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 75
+            yoffset 570
+            xsize 210
+            ysize 230
+            action [
+                Show("pop", message="С таким инструментом всегда нужно быть осторожнее."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 460
+            xsize 265
+            ysize 100
+            action [
+                Show("pop", message="Ухоженные грядки."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=460, xsize=265, ysize=100)
+        #add "#ffff0040" at Transform(xoffset=1260, yoffset=810, xsize=420, ysize=150)
+        #add "#ff00ff40" at Transform(xoffset=75, yoffset=570, xsize=210, ysize=230)
+
+screen h4_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 620
+            xsize 20
+            ysize 90
+            action [
+                Show("pop", message="'Осторожно Злая собака'"),
                 Play("sound", "audio/select_click.mp3"),
                 SetVariable("found_bedroom_key", True)
             ]
@@ -126,33 +175,67 @@ screen search_bedroom():
         imagebutton:
             idle Null()
             hover Null()
-            xoffset 50
-            yoffset 100
-            xsize 100
-            ysize 100
+            xoffset 200
+            yoffset 540
+            xsize 455
+            ysize 540
             action [
-                Show("pop", message="Старый дневник."),
+                Show("pop", message="Калитка открыта."),
+                Play("sound", "audio/select_click.mp3"),
+                SetVariable("found_bedroom_diary", True)
+            ]
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 0
+            xsize 1920
+            ysize 540
+            action [
+                Show("pop", message="Хозяев участка не видно."),
                 Play("sound", "audio/select_click.mp3"),
                 SetVariable("found_bedroom_diary", True)
             ]
 
         # Подсветка областей
-        add "#ffff0040" at Transform(xoffset=200, yoffset=250, xsize=200, ysize=150)
-        add "#ff00ff40" at Transform(xoffset=50, yoffset=100, xsize=100, ysize=100)
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=620, xsize=20, ysize=90)
+        #add "#ff00ff40" at Transform(xoffset=200, yoffset=540, xsize=455, ysize=540)
+        #add "#ff00ff40" at Transform(xoffset=0, yoffset=0, xsize=1920, ysize=540)
 
-
-
-# Всплывающее окно (общее для всех)
+# Всплывающее
 screen pop(message):
     zorder 100
+    modal True
+
+    # Затемнение фона
+    add "#00000060"
+
     frame:
         xalign 0.5
-        yalign 0.1
-        xpadding 30
-        ypadding 20
-        background "#000000CC"
+        yalign 0.9
+        xsize 700
+        ysize 300
+        background Frame("gui/frame.png", 12, 12)
 
-        text "Заполнено: [message]" size 24 color "#FFFFFF"
+        vbox:
+            xalign 0.5
+            yalign 0.5
 
-    # Автоматическое скрытие через 2 секунды
-    timer 2.0 action Hide("pop")
+            text message:
+                size 28
+                color "#000000"
+                text_align 0.5
+                xalign 0.5
+                yalign 0.4
+
+        textbutton " OK ":
+            keysym "input_enter"
+            text_size 25
+            xalign 0.5
+            yalign 0.9
+            action Hide("pop")
+
+    # Горячие клавиши
+    key "K_RETURN" action Hide("pop_simple")
+    key "K_SPACE" action Hide("pop_simple")
