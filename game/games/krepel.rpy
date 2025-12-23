@@ -13,9 +13,8 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
     fixed:
         xsize 700
         ysize 450
-        xalign 0.58
-        yalign 0.32
-
+        xalign 0.54
+        yalign 0.5
 
         frame:
             background Solid("#6CB0D8")
@@ -34,27 +33,24 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
 
             if show_rules:
                 # ПРАВИЛА
-                text "Правила тестирования" size 32 xalign 0.5 color "#000"
+                text "Для: [surname] [name[:1].upper()].[otch[:1].upper() + '.' if otch else ''] От: Нач." size 32 xalign 0.1 color "#000"
 
                 vbox:
                     spacing 15
                     xalign 0.5
                     xsize 550
 
-                    text "• Вам будут показаны два числа для сложения" size 22 color "#000"
-                    text "• У вас есть 10 секунд, чтобы ввести ответ" size 22 color "#000"
-                    text "• Второй попытки на ввод не дается" size 22 color "#000"
-                    text "• Всего будет [rounds] раундов" size 22 color "#000"
-                    text "• Для ввода используйте цифровую клавиатуру" size 22 color "#000"
-                    text "• Будьте внимательны!" size 22 color "#000"
-
-                textbutton "Начать игру":
+                    text "Доброе утро, [name]." size 22 color "#000"
+                    text "Разослал вам и вашим коллегам последние показания." size 22 color "#000"
+                    text "Вам достался 4-ый участок." size 22 color "#000"
+                    text "Рассчитайте, пожалуйста, показания до конца рабочего дня." size 22 color "#000"
+                textbutton "Файл":
                     action [
                         Return({"start": True})
                     ]
                     keysym "input_enter"
-                    xalign 0.5
-                    xsize 250
+                    xalign 0.9
+                    xsize 100
                     background Solid("#6CB0D8")
                     text_size 28
                     text_color "#fff"
@@ -62,7 +58,7 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
 
             else:
                 # КРЕПЕЛИН
-                text "Укажите показания" size 32 xalign 0.5 color "#000"
+                text "Рассчитайте показания" size 32 xalign 0.5 color "#000"
 
                 hbox:
                     spacing 15
@@ -102,13 +98,13 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                             text_align 0.5
                             color "#000"
 
-                text "Заполнено: [r_numb] из [rounds]" size 24 xalign 0.5 color "#555"
+                text "Страница: [r_numb] из [rounds]" size 24 xalign 0.5 color "#555"
 
                 hbox:
                     spacing 20
                     xalign 0.5
 
-                    textbutton "Так Далее":
+                    textbutton "Далее":
                         action [
                             SetVariable("vrem_vsy", time_vsy),
                             SetVariable("us_ans", us_ans),
@@ -116,13 +112,14 @@ screen mini_game_ui(num1, num2, ver, r_numb, rounds, show_rules=False):
                         ]
                         keysym "input_enter"
                         xsize 200
+                        sensitive us_ans
                         background Solid("#6CB0D8")
                         text_size 28
                         text_color "#fff"
                         padding (15, 10)
 
 label mini_game_screen:
-    $ chet = 0
+    $ kr_schet = 0
     $ rounds = 9
     $ r_numb = 0
 
@@ -138,11 +135,12 @@ label mini_game_screen:
 
         call screen mini_game_ui(num1, num2, ver, r_numb + 1, rounds, show_rules=False)
 
-        if not store.vrem_vsy and str(us_ans) == str(ver):
-            $ chet += 1
-
+        if str(us_ans) == str(ver):
+            if not store.vrem_vsy:  # Уложился вовремя (≤10 сек)
+                $ kr_schet += 5
+            else:  # Правильно, но превысил время (>10 сек)
+                $ kr_schet += 1
         $ r_numb += 1
 
-    $ schet = chet
-    "Тест завершён. Ваш результат: [chet] из [rounds]."
+    "Кажется в файле больше ничего не было."
     return

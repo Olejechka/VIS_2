@@ -1,12 +1,23 @@
 ﻿screen ct_ui():
     tag mini_game
-    add "schet.png" xalign 0.95
+
+    if h_reason == "Магнит":
+        add "ct_m.png":
+            pos (0.65, 0.2)
+    elif h_reason == "Перемычка":
+        add "ct_p.png":
+            pos (0.65, 0.2)
+    else:
+        add "ct.png":
+            pos (0.65, 0.2)
+
+    text " ".join(str(h_counter)) size 28 xalign 0.74 yalign 0.355 color "#ffffff"
 
     fixed:
         xsize 1000
         ysize 600
         xalign 0.05
-        yalign 0.35
+        yalign 0.38
 
         frame:
             background "otch.png"
@@ -59,7 +70,7 @@
                     padding (10, 5)
                     align (0.5, 0.5)
 
-        # Показание счетчика - ручной ввод (оставляем как было)
+        # Показание счетчика - ручной ввод
         vbox:
             spacing 25
             yalign 0.5
@@ -93,7 +104,7 @@
             hbox:
                 spacing 15
 
-                text "Требования" size 20 color "#000"
+                text "Требования соблюдены?" size 20 color "#000"
 
                 textbutton "[us_fault] ▼":
                     action fault_dropdown
@@ -149,36 +160,37 @@
 
 label ct_lb:
     # Дефолтными значениями
-    default us_number = 1
-    default us_name = "Иванов И.И."
-    default us_counter = "00000"
-    default us_fault = "Нет"
-    default us_reason = "Нарушений не обнаружено"
+    $ us_number = 1
+    $ us_name = "Иванов И.И."
+    $ us_counter = "00000"
+    $ us_fault = "Нет"
+    $ us_reason = "Нарушений не обнаружено"
 
     python:
         # 1. Список номеров домов (1-9)
         house_dropdown = DropDown(
-            _("1"), SetVariable("us_number", 1),
-            _("2"), SetVariable("us_number", 2),
-            _("3"), SetVariable("us_number", 3),
-            _("4"), SetVariable("us_number", 4),
-            _("5"), SetVariable("us_number", 5),
-            _("6"), SetVariable("us_number", 6),
-            _("7"), SetVariable("us_number", 7),
-            _("8"), SetVariable("us_number", 8),
-            _("9"), SetVariable("us_number", 9),
+            _("1"), SetVariable("us_number", "1"),
+            _("2"), SetVariable("us_number", "2"),
+            _("3"), SetVariable("us_number", "3"),
+            _("4"), SetVariable("us_number", "4"),
+            _("5"), SetVariable("us_number", "5"),
+            _("6"), SetVariable("us_number", "6"),
+            _("7"), SetVariable("us_number", "7"),
+            _("8"), SetVariable("us_number", "8"),
+            _("9"), SetVariable("us_number", "9"),
             modal=True
         )
 
         # 2. Список ФИО собственников (можно добавить сколько нужно)
         name_dropdown = DropDown(
-            _("Иванов И.И."), SetVariable("us_name", "Иванов И.И."),
-            _("Петров П.П."), SetVariable("us_name", "Петров П.П."),
-            _("Сидоров С.С."), SetVariable("us_name", "Сидоров С.С."),
-            _("Кузнецов К.К."), SetVariable("us_name", "Кузнецов К.К."),
-            _("Смирнов С.С."), SetVariable("us_name", "Смирнов С.С."),
-            _("Васильев В.В."), SetVariable("us_name", "Васильев В.В."),
-            _("Николаев Н.Н."), SetVariable("us_name", "Николаев Н.Н."),
+            _("ФАМИЛИЯ А.И."), SetVariable("us_name", "ФАМИЛИЯ А.И."),
+            _("Арсеньев В.А."), SetVariable("us_name", "Арсеньев В.А."),
+            _("КАРЕНИНА А.А."), SetVariable("us_name", "КАРЕНИНА А.А."),
+            _("Алексеев Р.Е."), SetVariable("us_name", "Алексеев Р.Е."),
+            _("Мазайхин И.С."), SetVariable("us_name", "Мазайхин И.С."),
+            _("Книжная О.Э."), SetVariable("us_name", "Книжная О.Э."),
+            _("Грозный И.В."), SetVariable("us_name", "Грозный И.В."),
+            _("Романов Е.Г."), SetVariable("us_name", "Романов Е.Г."),
             modal=True
         )
 
@@ -204,23 +216,32 @@ label ct_lb:
 
     if _return:
         python:
-            correct = (
-                us_number == h_number and
-                us_name == h_name and
-                us_counter == h_counter and
-                us_fault == h_fault and
-                us_reason == h_reason
-            )
+            if us_number == h_number:
+                ct_schet += 1
+            if us_name == h_name:
+                ct_schet += 1
+            if us_counter == h_counter:
+                ct_schet += 1
+            if us_fault == h_fault:
+                ct_schet += 1
+            if us_reason == h_reason:
+                ct_schet += 1
 
-            if correct:
-                schet += 1
-                renpy.notify("Верно! +1 балл")
-            else:
-                renpy.notify("Есть ошибки, попробуйте еще раз")
-                us_number = 1
-                us_name = "Иванов И.И."
-                us_counter = "00000"
-                us_fault = "Нет"
-                us_reason = "Нарушений не обнаружено"
+            ct += 1
+            renpy.notify("Верно")
+            if curr_lock == "h1":
+                c_h1 = True
+            elif curr_lock == "h3":
+                c_h3 = True
+            elif curr_lock == "h5":
+                c_h5 = True
+            elif curr_lock == "h6":
+                c_h6 = True
+            elif curr_lock == "h8":
+                c_h8 = True
+            elif curr_lock == "h9":
+                c_h9 = True
+
+
 
     return

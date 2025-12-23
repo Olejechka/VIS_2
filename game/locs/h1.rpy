@@ -1,21 +1,40 @@
-﻿
-
-define h1_v = 0
+﻿define h1_v = 0
 define h1_n = 0
+
+define h1_сt = ""
+define h1_f = ""
+define h1_r = ""
 
 # МУЖЧИНА за 40
 # МУЖЧИНА за 40
 label h1:
-    $ h_number = 5
-    $ h_name = "Петров П.П."
-    $ h_counter = "12345"
-    $ h_fault = "Да"
-    $ h_reason = "Магнит"
-
-
     $ curr_lock = "h1"
+    if ct == 6:
+        r "Это был последний счетчик."
+        r "Пора возвращаться на базу."
+        scene black with fade
+        jump final
+
+    $ h_number = hn_1
+    $ h_name = "Арсеньев В.А."
+
+    $ h_counter = h1_сt
+    $ h_fault = h1_f
+    $ h_reason = h1_r
+
     scene der4 at right
     if h1_v == 0:
+        python:
+            import random
+            counter_value = random.randint(10000, 70000)
+            h1_сt = str(counter_value).zfill(5)
+
+            h1_f = random.choice(["Да", "Нет"])
+
+            if h1_f == "Да":
+                h1_r = "Нарушений не обнаружено"
+            else:
+                h1_r = random.choice(["Магнит", "Перемычка"])
         hide screen map_but
         show fance at center
         "*Вы приближаетесь к довольно милому домику, окна чуть приоткрыты и из них слышится футбольный матч, который играет из телевизора.*"
@@ -64,16 +83,16 @@ label h1:
             "1. Можно просто поговорить?":
                 m_30 "Валяй"
                 jump h1_q
-            "2. Проверить счетчик":
-                hide screen map_but
-                call ct_lb
-                show screen map_but
-            "3. Осмотреться":
+            "2. Осмотреться":
                 hide m_30m with dissolve
                 hide screen map_but with dissolve
                 call screen search
                 show m_30m with dissolve
                 show screen map_but with dissolve
+            "3. Проверить счетчик" if c_h1 == False:
+                hide screen map_but
+                call ct_lb
+                show screen map_but
     jump h1
 
 label h1_q:
@@ -96,7 +115,7 @@ label h1_q:
                 show screen map_but
          "3. Не подскажете номер вашего дома?":
                 hide screen map_but
-                m_30 "Как дом построил, так сразу номер девять и присвоили."
+                m_30 "Как дом построил, так сразу номер [hn_1] и присвоили."
                 "*Ваш собесседник посмеивается.*"
                 show screen map_but
          "4. Происходит что-то интересное в деревне?":

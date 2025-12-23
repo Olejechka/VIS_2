@@ -1,17 +1,40 @@
 ﻿define h3_v = 0
 define h3_n = 0
 
+define h3_сt = ""
+define h3_f = ""
+define h3_r = ""
+
 # ЖЕНЩИНА ЗА 60
 label h3:
-    $ h_number = 3
-    $ h_name = "Петров П.П."
-    $ h_counter = "12345"
-    $ h_fault = "Да"
-    $ h_reason = "Магнит"
-
     $ curr_lock = "h3"
+
+    if ct == 6:
+        r "Это был последний счетчик."
+        r "Пора возвращаться на базу."
+        scene black with fade
+        jump final
+
+    $ h_number = hn_3
+    $ h_name = "ФАМИЛИЯ А.И."
+
+    $ h_counter = h3_сt
+    $ h_fault = h3_f
+    $ h_reason = h3_r
+
     scene der5 at center
     if h3_v == 0:
+        python:
+            import random
+            counter_value = random.randint(10000, 70000)
+            h3_сt = str(counter_value).zfill(5)
+
+            h3_f = random.choice(["Да", "Нет"])
+
+            if h3_f == "Да":
+                h3_r = "Нарушений не обнаружено"
+            else:
+                h3_r = random.choice(["Магнит", "Перемычка"])
         hide screen map_but
         show fance at center
         "*Не успев подойти к дому, послышался неприятный женский голос*"
@@ -43,18 +66,18 @@ label h3:
             "1. Можно просто поговорить?":
                 w_60 "Молвите скорее, вишь дела есть."
                 jump h3_q
-            "2. Проверить счетчик":
-                hide screen map_but
-                "*Переступив через ограду, можно было отправиться проверять счётчик.*"
-                w_60 "Смотрите и уматывайте, чтобы и духу вашего сдеся больше не было."
-                call ct_lb
-                show screen map_but
-            "3. Осмотреться":
+            "2. Осмотреться":
                 hide wom2 with dissolve
                 hide screen map_but with dissolve
                 call screen search
                 show wom2 with dissolve
                 show screen map_but with dissolve
+            "3. Проверить счетчик"if c_h3 == False:
+                hide screen map_but
+                "*Переступив через ограду, можно было отправиться проверять счётчик.*"
+                w_60 "Смотрите и уматывайте, чтобы и духу вашего сдеся больше не было."
+                call ct_lb
+                show screen map_but
     jump h3
 
 label h3_q:
@@ -78,7 +101,7 @@ label h3_q:
             show screen map_but
         "3. Не подскажете номер вашего дома?":
             hide screen map_but
-            w_60 "Уж как 67 лет хата моя тут стоит под номером 1. Еёшнюю мой батя ещё строил. Помню как мы с сестрицей моей младшей - Лизкой, верили, что на лесопилке той бабай живёт."
+            w_60 "Уж как 67 лет хата моя тут стоит под номером [hn_3]. Еёшнюю мой батя ещё строил. Помню как мы с сестрицей моей младшей - Лизкой, верили, что на лесопилке той бабай живёт."
             w_60 "Когда мы провинивались, мать с отцом всегда запуживали нас им. Говорили, мол, будите себя плого вести и тот евонный вас топором как чурки разрубит."
             show screen map_but
         "4. Есть ли слухи?":
