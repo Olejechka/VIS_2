@@ -3,13 +3,24 @@ define golos = Character('')
 define dog = Character('', what_color = "#9a0e2a")
 
 
-define vovan = Character('Вовка-добрая душа', what_slow_cps = 15, what_size=40)
+define vovan = Character('Вовка-добрая душа', what_slow_cps = 20, what_size=40)
 
-define m = Character('Мужчина', color="#9a0e2a", what_slow_cps = 15, what_size=40)
-define m_30 = Character('Мужчина за 40', what_slow_cps = 15, what_size=40)
-define wom = Character('Девушка', what_slow_cps = 15, what_size=40)
-define w_60 = Character('Пожилая дама', what_slow_cps = 15, what_size=40)
+define m = Character('Мужчина', color="#9a0e2a", what_slow_cps = 20, what_size=40)
+define m_30 = Character('Мужчина за 40', what_slow_cps = 20, what_size=40)
+define w_30 = Character('Девушка за 30', what_slow_cps = 20, what_size=40)
+define w_60 = Character('Пожилая дама', what_slow_cps = 20, what_size=40)
+define dead_0 = Character('Дедушка', what_slow_cps = 20, what_size=40)
+define roma_0 = Character('Наглый живчик', what_slow_cps = 20, what_size=40)
+define w_50 = Character('Женщина за 50', what_slow_cps = 20, what_size=40)
 
+define ct = 0
+
+define c_h1 = False
+define c_h3 = False
+define c_h5 = False
+define c_h6 = False
+define c_h8 = False
+define c_h9 = False
 
     # Правильные для проверки
 define h_number = 1
@@ -17,6 +28,12 @@ define h_name = ""
 define h_counter = ""
 define h_fault = ""
 define h_reason = ""
+
+default us_number = 1
+default us_name = "Иванов И.И."
+default us_counter = "00000"
+default us_fault = "Нет"
+default us_reason = "Нарушений не обнаружено"
 
 default selected_location = None
 

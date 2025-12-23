@@ -102,7 +102,7 @@ screen input_fio_screen():
             xalign 0.5
             yalign 0.5
 
-            label "Ф.И.О. тестируемого" xalign 0.5
+            label "Карточка сотрудника" xalign 0.5
 
             if step == 1:
                 vbox:
@@ -187,29 +187,64 @@ screen map_screen:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", l_1), Return()]
-        xalign 0.7
-        yalign 0.8
+        xalign 0.78
+        yalign 0.7
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", l_2), Return()]
         xalign 0.35
-        yalign 0.52
+        yalign 0.58
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", l_3), Return()]
-        xalign 0.7
-        yalign 0.52
+        xalign 0.66
+        yalign 0.55
 
     imagebutton:
         idle "org.png"
         hover "blu.png"
         action [SetVariable("selected_location", l_4), Return()]
-        xalign 0.5
-        yalign 0.52
+        xalign 0.465
+        yalign 0.56
+
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", l_5), Return()]
+        xalign 0.532
+        yalign 0.56
+
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", l_6), Return()]
+        xalign 0.8
+        yalign 0.53
+
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", l_7), Return()]
+        xalign 0.95
+        yalign 0.75
+
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", l_8), Return()]
+        xalign 0.012
+        yalign 0.4
+
+    imagebutton:
+        idle "org.png"
+        hover "blu.png"
+        action [SetVariable("selected_location", l_9), Return()]
+        xalign 0.085
+        yalign 0.6
 
     textbutton "Назад" action Return() xalign 0.95 yalign 0.95
 

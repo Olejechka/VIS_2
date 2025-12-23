@@ -5,6 +5,11 @@ define r = Character('Геннадий', color="#00bfff", what_slow_cps = 15, wh
 define ruqa = Character('Руководитель', color="#9a0e2a", what_slow_cps = 15, what_size=40)
 
 
+default kr_schet = 0
+default ct_schet = 0
+default sh_schet = 0
+
+
 default schet = 0
 
 default name = ""
@@ -15,15 +20,32 @@ default otch = ""
 init python:
     def randL():
         import random
-        locs = ["h1", "h2", "h3", "h4"]
+        locs = ["h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9"]
+        nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
         random.shuffle(locs)
+        random.shuffle(nums)
 
         # Присваиваем каждой кнопке свою локацию
+        renpy.store.hn_1 = nums[0]
+        renpy.store.hn_2 = nums[1]
+        renpy.store.hn_3 = nums[2]
+        renpy.store.hn_4 = nums[3]
+        renpy.store.hn_5 = nums[4]
+        renpy.store.hn_6 = nums[5]
+        renpy.store.hn_7 = nums[6]
+        renpy.store.hn_8 = nums[7]
+        renpy.store.hn_9 = nums[8]
+
         renpy.store.l_1 = locs[0]
         renpy.store.l_2 = locs[1]
         renpy.store.l_3 = locs[2]
         renpy.store.l_4 = locs[3]
+        renpy.store.l_5 = locs[4]
+        renpy.store.l_6 = locs[5]
+        renpy.store.l_7 = locs[6]
+        renpy.store.l_8 = locs[7]
+        renpy.store.l_9 = locs[8]
 
 # Вместо использования оператора image можете просто
 # складывать все ваши файлы изображений в папку images.
@@ -35,18 +57,20 @@ init python:
 
 label start:
     $ randL()
-    #jump h1
+    jump final
     play music work_b fadein 1.0
     "*Ранним утром, взбодренные поездкой в общественном транспорте, вы, как обычно, включили свой рабочий компьютер и открыли корпоративную почту.*"
-    "*Сообщение от руководства: Доброе утро, коллега. Довожу до вашего сведения, что вам необходимо пройти небольшой квалификационные тест на нашем сайте, что бы..*"
-    "*Не дочитав сообщение до конца вы переходите по ссылке из сообщения и попадаете на сайт.*"
+    "*На глаза вам сразу же попадается сообщение от начальника с пометкой 'Важное'.*"
 
     show office with fade
+
     call screen input_fio_screen
-    call schulte_game_screen
+    call mini_game_screen
+
+
 
     r "Доброе утро, напарник!"
-    r "Вижу, ты пишешь тест, но я вынужден тебя отвлечь."
+    r "Вижу, ты уже закончил со своим участком, это очень вовремя."
     r "Руководство зовет нас с тобой на инструктаж, кажется сегодня будет рабочий выезд."
     hide office with fade
     jump h1
