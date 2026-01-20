@@ -31,6 +31,8 @@ In this **game You'll**:
 
 - **Scoring system**
 
+---
+
 ### Mini-games
   - *Kraepelin Test* timed arithmetic calculations
   - *Documentation work* filling in the blanks on the form
@@ -40,5 +42,7 @@ In this **game You'll**:
 - Built with **Ren'Py Engine**
 - Python-based mini-game systems
 - Custom UI screens
+
+---
 
 # Open in Ren'Py SDK (8.x recommended)
