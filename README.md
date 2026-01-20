@@ -1,5 +1,6 @@
 # KStory (inDev)
 
+[!(https://img.shields.io/github/v/release/Olejechka/VIS_2?include_prereleases&label=latest%20ver)](https://github.com/Olejechka/VIS_2/releases)
 
 ### Overview
 
@@ -46,4 +47,3 @@ In this **game You'll**:
 ---
 
 # SDK 8.x recommended
-[![Latest](https://img.shields.io/github/v/release/Olejechka/VIS_2?include_prereleases&label=latest%20ver)](https://github.com/Olejechka/VIS_2/releases)
