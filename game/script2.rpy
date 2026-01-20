@@ -1,0 +1,190 @@
+﻿# Персонаж
+define golos = Character('')
+define dog = Character('', what_color = "#9a0e2a")
+
+
+define vovan = Character('Вовка-добрая душа', what_slow_cps = 20, what_size=40)
+
+define m = Character('Мужчина', color="#9a0e2a", what_slow_cps = 20, what_size=40)
+define m_30 = Character('Мужчина за 40', what_slow_cps = 20, what_size=40)
+define w_30 = Character('Девушка за 30', what_slow_cps = 20, what_size=40)
+define w_60 = Character('Пожилая дама', what_slow_cps = 20, what_size=40)
+define dead_0 = Character('Дедушка', what_slow_cps = 20, what_size=40)
+define roma_0 = Character('Наглый живчик', what_slow_cps = 20, what_size=40)
+define w_50 = Character('Женщина за 50', what_slow_cps = 20, what_size=40)
+
+define ct = 0
+
+define c_h1 = False
+define c_h3 = False
+define c_h5 = False
+define c_h6 = False
+define c_h8 = False
+define c_h9 = False
+
+    # Правильные для проверки
+define h_number = 1
+define h_name = ""
+define h_counter = ""
+define h_fault = ""
+define h_reason = ""
+
+default us_number = 1
+default us_name = "Иванов И.И."
+default us_counter = "00000"
+default us_fault = "Нет"
+default us_reason = "Нарушений не обнаружено"
+
+default selected_location = None
+
+define curr_lock = None
+
+
+## ПЕРЕКЛЮЧАТЕЛЬ КАРТЫ
+
+
+label open_map:
+    play audio b_o
+    call screen map_screen with fade
+    if selected_location == "h1":
+        if selected_location != curr_lock:
+            stop music
+            play music foot
+        scene
+        jump h1
+    elif selected_location == "h2":
+        if selected_location != curr_lock:
+            stop music
+        scene
+        jump h2
+    elif selected_location == "h3":
+        if selected_location != curr_lock:
+           stop music
+           play music malah
+        scene
+        jump h3
+    elif selected_location == "h4":
+        if selected_location != curr_lock:
+            stop music
+        scene
+        jump h4
+    elif selected_location == "h5":
+        if selected_location != curr_lock:
+            stop music
+            play music anon
+        scene
+        jump h5
+    elif selected_location == "h6":
+        if selected_location != curr_lock:
+            stop music
+            play music radio
+        scene
+        jump h6
+    elif selected_location == "h7":
+        if selected_location != curr_lock:
+           stop music
+           play music smeh
+        scene
+        jump h7
+    elif selected_location == "h8":
+        if selected_location != curr_lock:
+            stop music
+            play music naglost
+        scene
+        jump h8
+    elif selected_location == "h9":
+        if selected_location != curr_lock:
+            stop music
+            play music hildur
+        scene
+        jump h9
+    else:
+        jump expression selected_location
+
+## ОБУЧЕНИЕ
+
+label start_vil:
+    play music glitchfolk
+    "*Ваш напарник Геннадий всегда хорошо чувствовал себя за рулем, вот и в этот раз он резво управлял служебной машиной, напевая какую-то веселую песенку себе под нос*"
+    "*Вы и ваш напарник проводите какое-то время в пути...*"
+    "*...*"
+    "*Пейзаж города плавно сменился на виды пригородной застройки.*"
+    "*...*"
+    "*Вы заезжате в густой лес, лучи летнего солнца изредка пробиваются через кроны елей и резко ударяют вам в глаза.*"
+    "*...*"
+    "*Ещё через какое-то время, вы сворачиваете на перекрестке и выезжаете к деревне 'Гончарики.'*"
+    "*Ваш напарник глушит мотор и поворачивается к вам.*"
+
+    r "Что-то я устал уже баранку крутить, давай лучше прогуляемся отсюда"
+    "*Вы решаете поддержать напарника. Тот, испытывая радость от вашего согласия, достает кипу документов и старую карту из бардачка и вместе с вами покидает автомобиль.*"
+
+    show vill_ent with fade
+
+    r "Ну, мы на месте. Старые добрые 'Гончарики'. Я бывал тут пару раз много лет назад, дед брал меня на рыбалку на реку неподалёку"
+
+    r "Как настрой, напарник?"
+
+    menu:
+        "Готов к труду и обороне!":
+            r "Это правильно, негоже в такую погоду хандрить"
+        "Давай просто приступим":
+            r "Хорошо-хорошо, главное не вешай нос"
+        "Дорога была довольно долгой":
+            r "Зато оглянись, где мы оказалусь. Утро, зелень, птички поют, ну просто загляденье"
+            "..."
+    r "Ладно, приступим к делу"
+    jump delo
+
+label delo:
+
+    r "Как видишь, деревушка старая, многие домики уже заброшены. Сети и связи тут нет, так что придётся пользоваться вот этим..."
+
+    "*Геннадий показывает вам потрепанную карту, ранее взятую из бардачка*"
+
+    r "Еле нашёл её в наших архивах"
+    r "Так всяко лучше"
+    "*Геннадий демонстративно машет рукой вперед.*"
+    r "Где-то там поодаль есть ещё жилые застройки, вот туда то нам и нужно"
+
+    r "Тут на карте есть нумера..."
+    r "Так вот они неверные"
+    r " Когда-то были верными, но сейчас уже нет. Перестройка внесла свои корректировки в здешний порядок"
+
+    r "Обычно снимать показания сюда ездит другая бригада, но их отправили куда-то в другое место, а про нумерацию я спросить не успел"
+
+    r "Так что нумера домов придётся теперь узнавать непосредственно от местных"
+    r "Они не смогут нам соврать"
+    r "Однако стоит быть аккуратными, всякий народец может проживать в подобных местах"
+
+    r "Ладно, держи, вот тебе карта, обращайся с ней осторожно"
+
+    "*Вы аккуратно принимаете от Геннадия карту.*"
+
+    norr "Теперь у вас есть карта."
+
+    norr "Карта - это один из основных инструментов в вашем грядущем приключении."
+
+    norr "Она будет дуступна в правом верхнем углу, пока вы находитесь вне диалогов или мини-игр."
+    show screen map_but
+    $ selected_location = "f_ch"
+
+label f_ch:
+    $ selected_location = "f_ch"
+    r "Давай начнем с дома под номером 1."
+    menu:
+        "А может лучше домой?":
+            hide screen map_but
+            "*Геннадий приглядывается к своим часам на правой руке.*"
+            r "Вроде рано ещё..."
+            show screen map_but
+        "Почему я должен тебе верить?":
+            hide screen map_but
+            r "А ты, вижу, юморным на свежем воздухе стал. Одобряю, юмор никогда не лишний"
+            "*Геннадий добродушно улыбается.*"
+            show screen map_but
+        "Это как-то слишком сложно...":
+            hide screen map_but
+            r "Ну ты чего, боец? Это же только начало, рано опускать руки"
+            show screen map_but
+
+    jump f_ch
