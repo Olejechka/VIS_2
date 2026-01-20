@@ -1,5 +1,4 @@
 # KStory (inDev)
----
 
 ## Overview
 
@@ -19,9 +18,11 @@ In this **game You'll**:
 ### Main mechanics
 
 <img width="1918" height="1079" alt="изображение" src="https://github.com/user-attachments/assets/607c9473-6b8d-468c-9be2-3cd89514ecff" />
+
 - **Map navigation system** between key locations
 
 <img width="1919" height="1079" alt="изображение" src="https://github.com/user-attachments/assets/7682ba26-e8d1-4f9d-9291-e3317ce4987c" />
+
 - **Clickable inspection scenes** with interactive hotspots
 
 - **Three mini-games**
