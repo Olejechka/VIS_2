@@ -1,6 +1,6 @@
-# KStory (inDev)
+### KStory (inDev)
 
-## Overview
+### Overview
 
 KStory is **visual novel**, **point-and-click exploration**, and **mini-games work simulator**.
 
