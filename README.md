@@ -2,7 +2,6 @@
 
 [![Latest](https://img.shields.io/github/v/release/Olejechka/VIS_2?include_prereleases&label=latest%20)](https://github.com/Olejechka/VIS_2/releases)
 
----
 
 ### Overview
 
