@@ -1,6 +1,5 @@
-### KStory (inDev)
+# KStory (inDev)
 
----
 
 ### Overview
 
@@ -16,6 +15,7 @@ In this **game You'll**:
 - Complete paperwork mini-games to progress
 
 ---
+
 
 ### Main mechanics
 
@@ -40,7 +40,5 @@ In this **game You'll**:
 - Built with **Ren'Py Engine**
 - Python-based mini-game systems
 - Custom UI screens
-
----
 
 # Open in Ren'Py SDK (8.x recommended)
