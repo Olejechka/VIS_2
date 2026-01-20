@@ -16,9 +16,9 @@
 
             # Должность
             $ position = ""
-            if schet < 45:
+            if schet < 30:
                 $ position = "Стажер"
-            elif schet <= 80:
+            elif schet <= 64 and schet > 30:
                 $ position = "Сотрудник"
             else:
                 $ position = "Детектив"

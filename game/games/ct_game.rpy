@@ -139,7 +139,7 @@
             xalign 0.5
             yalign 0.8
             text "месяц: июль." size 22 color "#000"
-            text "проверяющие: Ганнадий Ч.А  [surname] [name[:1].upper()].[otch[:1].upper() + '.' if otch else '']" size 22 color "#000"
+            text "проверяющие: Черникин Г.А  [surname] [name[:1].upper()].[otch[:1].upper() + '.' if otch else '']" size 22 color "#000"
 
         hbox:
             spacing 20
@@ -156,13 +156,16 @@
 
         textbutton "Назад" action Return(False) xalign 0.95 yalign 0.95
 
+    add "atanol.jpg":
+        pos (0.5, 0.12)
+
 
 
 label ct_lb:
     # Дефолтными значениями
     $ us_number = 1
     $ us_name = "Иванов И.И."
-    $ us_counter = "00000"
+    $ us_counter = ""
     $ us_fault = "Нет"
     $ us_reason = "Нарушений не обнаружено"
 
@@ -183,7 +186,7 @@ label ct_lb:
 
         # 2. Список ФИО собственников (можно добавить сколько нужно)
         name_dropdown = DropDown(
-            _("ФАМИЛИЯ А.И."), SetVariable("us_name", "ФАМИЛИЯ А.И."),
+            _("Ивановна А.И."), SetVariable("us_name", "Ивановна А.И."),
             _("Арсеньев В.А."), SetVariable("us_name", "Арсеньев В.А."),
             _("КАРЕНИНА А.А."), SetVariable("us_name", "КАРЕНИНА А.А."),
             _("Алексеев Р.Е."), SetVariable("us_name", "Алексеев Р.Е."),
@@ -228,7 +231,6 @@ label ct_lb:
                 ct_schet += 1
 
             ct += 1
-            renpy.notify("Верно")
             if curr_lock == "h1":
                 c_h1 = True
             elif curr_lock == "h3":

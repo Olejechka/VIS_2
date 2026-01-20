@@ -64,7 +64,7 @@ label start:
 
     show office with fade
 
-    call mini_game_screen from _call_mini_game_screen
+    call mini_game_screen
 
     r "Доброе утро, напарник!"
     r "Вижу, ты уже закончил со своим участком, это очень вовремя"

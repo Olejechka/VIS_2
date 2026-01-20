@@ -8,7 +8,7 @@
         use h1_s
 
     elif curr_lock == "h2":
-        add "der"
+        add "bober"
         use h2_s
 
     elif curr_lock == "h3":
@@ -19,15 +19,33 @@
         add "der6" at right
         use h4_s
 
+    elif curr_lock == "h5":
+        add "d_k" at center
+        use h5_s
+
+    elif curr_lock == "h6":
+        add "dead_dom" at left
+        use h6_s
+
+    elif curr_lock == "h7":
+        add "kd" at center
+        use h7_s
+
+    elif curr_lock == "h8":
+        add "d_b" at center
+        use h8_s
+
+    elif curr_lock == "h9":
+        add "d_h" at center
+        use h9_s
+
     else:
         # Фон по умолчанию
         add "default_background"
         text "Некорректное значение curr_lock" align (0.5, 0.5)
 
     # Общая кнопка "Назад" для всех экранов
-    textbutton "Назад" action Return() xalign 0.95 yalign 0.95
-
-
+    textbutton "Назад" action Return() xalign 0.95 yalign 0.95 text_color "#FFFFFF" text_hover_color "#67B4D2"
 
 screen h1_s():
     imagemap:
@@ -41,7 +59,7 @@ screen h1_s():
             xsize 180
             ysize 190
             action [
-                Show("pop", message="изношенные оходные сапоги."),
+                Show("pop", message="изношенные походные сапоги."),
                 Play("sound", "audio/select_click.mp3")
             ]
 
@@ -79,34 +97,21 @@ screen h2_s():
     imagemap:
         ground Null()
 
-        # Кнопки для кухни
         imagebutton:
             idle Null()
             hover Null()
-            xoffset 150
-            yoffset 150
-            xsize 180
-            ysize 180
+            xoffset 0
+            yoffset 0
+            xsize 1920
+            ysize 1080
             action [
-                Show("pop", message="--"),
-                Play("sound", "audio/select_click.mp3")
-            ]
-
-        imagebutton:
-            idle Null()
-            hover Null()
-            xoffset 400
-            yoffset 300
-            xsize 120
-            ysize 120
-            action [
-                Show("pop", message="--."),
+                Show("pop", message="'Закрыто'"),
                 Play("sound", "audio/select_click.mp3")
             ]
 
         # Подсветка областей
-        add "#ff000040" at Transform(xoffset=150, yoffset=150, xsize=180, ysize=180)
-        add "#00ff0040" at Transform(xoffset=400, yoffset=300, xsize=120, ysize=120)
+        #add "#ff000040" at Transform(xoffset=0, yoffset=0, xsize=1920, ysize=1080)
+
 
 
 
@@ -180,7 +185,7 @@ screen h4_s():
             xsize 455
             ysize 540
             action [
-                Show("pop", message="Калитка открыта."),
+                Show("pop", message="Калитку можно открыть."),
                 Play("sound", "audio/select_click.mp3"),
                 SetVariable("found_bedroom_diary", True)
             ]
@@ -202,6 +207,246 @@ screen h4_s():
         #add "#ffff0040" at Transform(xoffset=0, yoffset=620, xsize=20, ysize=90)
         #add "#ff00ff40" at Transform(xoffset=200, yoffset=540, xsize=455, ysize=540)
         #add "#ff00ff40" at Transform(xoffset=0, yoffset=0, xsize=1920, ysize=540)
+
+screen h5_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 1180
+            yoffset 730
+            xsize 740
+            ysize 300
+            action [
+                Show("pop", message="Куст с ягодами."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=1180, yoffset=730, xsize=740, ysize=300)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 910
+            yoffset 730
+            xsize 270
+            ysize 210
+            action [
+                Show("pop", message="Клумба с цветами."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=910, yoffset=730, xsize=270, ysize=210)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 330
+            yoffset 720
+            xsize 260
+            ysize 120
+            action [
+                Show("pop", message="Клумба с цветами."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ff00ff40" at Transform(xoffset=330, yoffset=720, xsize=260, ysize=120)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 460
+            xsize 265
+            ysize 100
+            action [
+                Show("pop", message="Ухоженные грядки."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+
+screen h6_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 0
+            xsize 265
+            ysize 100
+            action [
+                Show("pop", message="Наброс провода."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=0, xsize=265, ysize=100)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 500
+            xsize 220
+            ysize 520
+            action [
+                Show("pop", message="Уютная баня."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=200, xsize=220, ysize=520)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 220
+            yoffset 400
+            xsize 260
+            ysize 160
+            action [
+                Show("pop", message="Шкурки животных."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ff00ff40" at Transform(xoffset=220, yoffset=400, xsize=260, ysize=160)
+
+screen h7_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 450
+            yoffset 725
+            xsize 150
+            ysize 150
+            action [
+                Show("pop", message="Чебурашка."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=450, yoffset=725, xsize=125, ysize=125)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 880
+            yoffset 850
+            xsize 125
+            ysize 125
+            action [
+                Show("pop", message="Машинка."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=880, yoffset=850, xsize=125, ysize=125)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 1180
+            yoffset 730
+            xsize 740
+            ysize 300
+            action [
+                Show("pop", message="Вкусные ягоды."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=1180, yoffset=730, xsize=740, ysize=300)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 460
+            xsize 265
+            ysize 100
+            action [
+                Show("pop", message="Грядки."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+
+screen h8_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 800
+            xsize 1250
+            ysize 300
+            action [
+                Show("pop", message="Бетонная заливка."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=800, xsize=1250, ysize=300)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 1250
+            yoffset 850
+            xsize 425
+            ysize 100
+            action [
+                Show("pop", message="Иссохшие растения."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=1250, yoffset=850, xsize=425, ysize=100)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 900
+            yoffset 10
+            xsize 100
+            ysize 50
+            action [
+                Show("pop", message="Камера слежения."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=900, yoffset=10, xsize=100, ysize=50)
+
+screen h9_s():
+    imagemap:
+        ground Null()
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 0
+            yoffset 400
+            xsize 400
+            ysize 220
+            action [
+                Show("pop", message="Традиционное одеяние для приведий..."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=0, yoffset=400, xsize=400, ysize=220)
+
+        imagebutton:
+            idle Null()
+            hover Null()
+            xoffset 900
+            yoffset 650
+            xsize 255
+            ysize 270
+            action [
+                Show("pop", message="Удобная скамейка."),
+                Play("sound", "audio/select_click.mp3")
+            ]
+        # Подсветка областей
+        #add "#ffff0040" at Transform(xoffset=900, yoffset=650, xsize=255, ysize=270)
 
 # Всплывающее
 screen pop(message):
@@ -236,6 +481,4 @@ screen pop(message):
             yalign 0.9
             action Hide("pop")
 
-    # Горячие клавиши
-    key "K_RETURN" action Hide("pop_simple")
-    key "K_SPACE" action Hide("pop_simple")
+

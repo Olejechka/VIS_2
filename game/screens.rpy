@@ -184,69 +184,69 @@ screen map_screen:
     add "map.png"
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_1), Return()]
-        xalign 0.78
-        yalign 0.7
+        idle "b1.png"
+        hover "b1_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_1), Return()]
+        xpos 990
+        ypos 578
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_2), Return()]
-        xalign 0.35
-        yalign 0.58
+        idle "b2.png"
+        hover "b2_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_2), Return()]
+        xpos 1430
+        ypos 718
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_3), Return()]
-        xalign 0.66
-        yalign 0.55
+        idle "b3.png"
+        hover "b3_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_3), Return()]
+        xpos 1730
+        ypos 705
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_4), Return()]
-        xalign 0.465
-        yalign 0.56
+        idle "b4.png"
+        hover "b4_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_4), Return()]
+        xpos 109
+        ypos 605
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_5), Return()]
-        xalign 0.532
-        yalign 0.56
+        idle "b5.png"
+        hover "b5_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_5), Return()]
+        xpos 1424
+        ypos 537
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_6), Return()]
-        xalign 0.8
-        yalign 0.53
+        idle "b6.png"
+        hover "b6_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_6), Return()]
+        xpos 620
+        ypos 583
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_7), Return()]
-        xalign 0.95
-        yalign 0.75
+        idle "b7.png"
+        hover "b7_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_7), Return()]
+        xpos 1170
+        ypos 560
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_8), Return()]
-        xalign 0.012
-        yalign 0.4
+        idle "b8.png"
+        hover "b8_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.mp3"), SetVariable("selected_location", l_8), Return()]
+        xpos 1797
+        ypos 537
 
     imagebutton:
-        idle "org.png"
-        hover "blu.png"
-        action [SetVariable("selected_location", l_9), Return()]
-        xalign 0.085
-        yalign 0.6
+        idle "b9.png"
+        hover "b9_h.png"
+        action [With(fade), Play("audio", "audio/top.mp3"), Play("sound", "audio/b_c.wav"), SetVariable("selected_location", l_9), Return()]
+        xpos 815
+        ypos 569
 
-    textbutton "Назад" action Return() xalign 0.95 yalign 0.95
+    textbutton "Назад" action [With(fade), Play("sound", "audio/b_c.mp3"), Return()] xalign 0.95 yalign 0.95
 
 
 screen map_but:
@@ -550,7 +550,7 @@ screen main_menu():
     tag menu
 
     on "show" action Play("music", "audio/vn2sample4.mp3", loop=True, fadein=2.0)
-
+    on "show" action Play("audio", "audio/amb_m.mp3", loop=True, fadein=2.0)
     # Останавливаем музыку при уходе с меню
     on "hide" action Stop("music", fadeout=2.0)
 
